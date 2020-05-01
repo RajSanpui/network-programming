@@ -12,18 +12,25 @@ In addition it just specifies which address family - IPv4 or IPv6.
 
 The port number needs to be in network byte ordering. Network byte ordering is always big-endian which can differ from host byte ordering. Hence the conversion. Use htons( ) - Host byte to network byte short.
 
-The internet address in this structure depends on if you are coding server or client. In case of server, this should be the IP of host, whereas if you are coding a client it should be the IP address of remote server you are connecting to. The port number needs to be the port of remote server you are connecting.
+The internet address in this structure is always the address of server.
+If you are providing this address as a dotted decimal (like 10.45.89.30), then this is a string and it needs to be converted to actual internet address. For that use inet_addr( ) or inet_pton( ). 
+inet_addr( ) - Converts string to network IP for only IPv4
+inet_pton( ) - Converts string to network IP for IPv4 and IPv6
+
+The s_addr (sin_addr.s_addr) as specified above is the address of server o
 
 struct sockaddr_in {
     sa_family_t    sin_family; /* address family: AF_INET */
     in_port_t      sin_port;   /* port in network byte order */
-    struct in_addr sin_addr;   /* internet address */
+    struct in_addr sin_addr;   /* internet address - Convert dotted decimal to IP using inet_addr or inet_pton */
  };
 
  /* Internet address. */
  struct in_addr {
       uint32_t       s_addr;     /* address in network byte order */
   };
+  
+  
   
   
 
