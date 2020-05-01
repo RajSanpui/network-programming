@@ -30,7 +30,8 @@ struct sockaddr_in {
       uint32_t       s_addr;     /* address in network byte order */
   };
   
-  NOTE: If we give, "sin_addr.s_addr = INADDR_ANY;" This means it can bind to any address
+  NOTE: If we give, "sin_addr.s_addr = INADDR_ANY;" This means it can bind to any address of the m/c (A m/c can have different NICs so different IP addresses of same host)
+  INADDR_ANY is used when you don't need to bind a socket to a specific IP. When you use this value as the address when calling bind() , the socket accepts connections to all the IPs of the machine (Ref: https://stackoverflow.com/questions/16508685/understanding-inaddr-any-for-socket-programming)
   
  3. Important UNIX networking structures (Ref: https://www.tutorialspoint.com/unix_sockets/socket_structures.htm)
  
@@ -73,9 +74,9 @@ struct servent {
 };
 
 
-
 References:
 https://www.tutorialspoint.com/unix_sockets/socket_structures.htm
 https://stackoverflow.com/questions/26974179/calling-accept-gives-errorno-14-bad-address
 https://www.lixu.ca/2014/09/c-implicit-declaration-of-function.html
 http://man7.org/linux/man-pages/man2/accept.2.html
+https://stackoverflow.com/questions/16508685/understanding-inaddr-any-for-socket-programming
