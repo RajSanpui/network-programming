@@ -10,6 +10,8 @@ struct sockaddr_in
 Socket = IP address + port number, and this is what this structure is all about.
 In addition it just specifies which address family - IPv4 or IPv6.
 
+The port number needs to be in network byte ordering. Network byte ordering is always big-endian which can differ from host byte ordering. Hence the conversion. Use htons( ) - Host byte to network byte short.
+
 struct sockaddr_in {
     sa_family_t    sin_family; /* address family: AF_INET */
     in_port_t      sin_port;   /* port in network byte order */
@@ -20,6 +22,8 @@ struct sockaddr_in {
  struct in_addr {
       uint32_t       s_addr;     /* address in network byte order */
   };
+  
+  
 
 
 
