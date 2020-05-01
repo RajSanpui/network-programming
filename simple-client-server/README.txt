@@ -30,16 +30,50 @@ struct sockaddr_in {
       uint32_t       s_addr;     /* address in network byte order */
   };
   
+ 3. Important UNIX networking structures (Ref: https://www.tutorialspoint.com/unix_sockets/socket_structures.htm)
+ 
+ sockaddr -This is a generic socket address structure, which will be passed in most of the socket function calls. 
+ struct sockaddr {
+   unsigned short   sa_family;
+   char             sa_data[14];
+ };
   
-  
-  
+  sockaddr_in - Standard structure which stores most of information. This is often typecasted to sockaddr.
+  struct sockaddr_in {
+   short int            sin_family;
+   unsigned short int   sin_port;
+   struct in_addr       sin_addr;
+   unsigned char        sin_zero[8];
+};
 
+Used only in sockaddr_in to store the server address.
+struct in_addr {
+   unsigned long s_addr;
+};
 
+This structure is used to keep information related to host.
+struct hostent {
+   char *h_name; 
+   char **h_aliases; 
+   int h_addrtype;  
+   int h_length;    
+   char **h_addr_list
+	
+#define h_addr  h_addr_list[0]
+};
 
+servent -This particular structure is used to keep information related to service and associated ports.
+struct servent {
+   char  *s_name; 
+   char  **s_aliases; 
+   int   s_port;  
+   char  *s_proto;
+};
 
 
 
 References:
+https://www.tutorialspoint.com/unix_sockets/socket_structures.htm
 https://stackoverflow.com/questions/26974179/calling-accept-gives-errorno-14-bad-address
 https://www.lixu.ca/2014/09/c-implicit-declaration-of-function.html
 http://man7.org/linux/man-pages/man2/accept.2.html
