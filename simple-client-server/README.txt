@@ -30,6 +30,8 @@ struct sockaddr_in {
       uint32_t       s_addr;     /* address in network byte order */
   };
   
+  NOTE: If we give, "sin_addr.s_addr = INADDR_ANY;" This means it can bind to any address
+  
  3. Important UNIX networking structures (Ref: https://www.tutorialspoint.com/unix_sockets/socket_structures.htm)
  
  sockaddr -This is a generic socket address structure, which will be passed in most of the socket function calls. 
